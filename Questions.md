@@ -113,9 +113,6 @@ base type (in this case, the Product class) through a shared interface
 the appropriate implementation of the method based on the actual type 
 of the object at runtime.
 
-## Part 3
-[Page3](Training/Page3.md)
-
 #### Q22: What were we able to store our child classes in a list of Product?
 Clothing, Electronics, and Groceries are derived classes of Product
 
@@ -129,7 +126,31 @@ compilation error. This is because the ExpiryDate field is not defined
 in the Product class, and the compiler would not recognize it as a valid
 member of the Product class.
 
+## Part 3
+[Page3](Training/Page3.md)
+#### Q22: What were we able to store our child classes in a list of Product?
+abstract keyword is used to define abstract classes and abstract 
+members within those classes.
+
+#### Question 23: The abstract method no longer has a body, why is that? We also removed the word virtual, how do virtual and abstract relate?
+The reason the abstract method no longer has a body is because 
+abstract methods are intended to be overridden by derived classes,
+and they do not have a default implementation in the abstract class
+itself. Abstract methods serve as placeholders for functionality that
+must be implemented by any concrete (non-abstract) derived class.
+
+The virtual and abstract keywords are related in the context 
+of method overriding and inheritance:
+#### Question 24: We turned our constructors accesible type to protected. What objects have access to the constructor now that it's protected. And since we turned our class abstractwhy doesn't it matter that we can't create new instance ofProduct` in main?
+name, price, color, size, brand, experation date, basically other classes
+Abstract classes are meant to serve as base classes for other
+classes, and they typically define a common interface or behavior
+that derived classes must implement.
+
 #### Q25: The other classes didn't need to be changed. Specifically, the DisplayProductInfo() didn't need any changing when we swapped our method from virtual to abstract. Why?
+When you declare a method as abstract in a base class, you're essentially
+stating that the base class does not provide any implementation for this
+method, but it requires all derived classes to implement it.
 
 ## Part 4
 [Page4](Training/Page4.md)

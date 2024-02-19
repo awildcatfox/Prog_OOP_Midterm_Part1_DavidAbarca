@@ -20,7 +20,7 @@ namespace Prog_OOP_Midterm_Part1
             Price = price;
         }
 
-        public abstract void DisplayProductInfo();
+        public abstract void DisplayProductInfo(); 
      
     }
 }
