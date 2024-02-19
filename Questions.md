@@ -156,6 +156,9 @@ method, but it requires all derived classes to implement it.
 [Page4](Training/Page4.md)
 
 #### Q26: We set our set to private. What does private mean? And why might we want to set our set to private for our connection string (take a guess)?
+You set it to Private so that only code within the same class can modify
+the value of the property using the set accessor. Private should used when 
+dealing with data that is sensitice information like passwords
 
 ## Part 5
 [Page5](Training/Page5.md)

@@ -1,18 +1,29 @@
-﻿namespace Prog_OOP_Midterm_Part1
+﻿using prog_oop_midterm_part1;
+
+namespace Prog_OOP_Midterm_Part1
 {// David Abarca
     // 2/18/24
     internal class Program
     {
         static void Main()
         {
-            // Access the static property to get the data
-            List<Product> dataList = MyDatabase.Data;
+            // Using our UpdateConfig method to change our connection string. Make sure to pass in the correct information
+            Config.UpdateConnectionString("CramberryFarms", "training", "Admin", "1234");
 
-            // Display the data from the static class
-            foreach (Product product in dataList)
+            // Saving the connectionString to a local variable
+            string connectionString = Config.ConnectionString;
+
+            // Using the Database.ConnectToDatabase() method that takes a formatted connection string to connect
+            Database db = Database.ConnectToDatabase(connectionString);
+
+            // If it connects, grab the data as a list of product
+            // In the real world theres a lot of framework and code to make this happen
+            List<Product> data = db.Data();
+
+            // Display our list of product from the training table.
+            foreach (Product d in data)
             {
-
-                product.DisplayProductInfo();
+                d.DisplayProductInfo();
             }
         }
 
