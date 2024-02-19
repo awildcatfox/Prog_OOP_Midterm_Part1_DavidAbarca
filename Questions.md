@@ -68,25 +68,67 @@ can be overridden (redefined) in derived classes.
 #### Q13: Why do you think we made that method virtual ( only wrong answer is a blank answer. Give it a shot. )?
 we made the method virtual so it could be easier to
 change item names and prices without data conflicting
+
 #### Q14: What does dervied mean in the context of inheritance?
 "derived" refers to a class that inherits from another class,
 known as the base class or superclass. The derived class inherits
 the properties, methods, and behavior of the base class, and it
 can extend or modify them as needed.
+
 #### Q15: Is one class is derived, the class that it derives from is considered the "b___" class. What is it?
+When one class is derived from another class, the class that
+it derives from is considered the "base" class.
+
 #### Q16: When inheriting from a parent class, which class member ( field, constructor, properties, or method ) do you HAVE to create in your child class?
+When inheriting from a parent class, the class member that you must create in your child class is the constructor.
+
 #### Q17: Our constructor has the syntax `public Groceries(string name, double price, string expiryDate) : base(name, price)`. What is this for?
+public Groceries(string name, double price, string expiryDate): This
+is the constructor of the Groceries class. It takes three parameters: name, 
+price, and expiryDate. This constructor initializes members specific to the
+Groceries class.
+
 #### Q18: For our DisplayProductInfo() we now used the word `override` instead of `virtual`. Why is that? And what happens if we take the word `virtual` away from the method inside of Product?
+When you mark a method in a derived class with the override keyword,
+you're explicitly stating that this method is intended to replace the
+implementation of a method with the same signature in the base class.
+ If you remove the virtual keyword from the method inside the Product 
+ class, it means that the method cannot be overridden in derived classes.
+ Without virtual, the method in the base class cannot be redefined in
+ derived classes using override. Therefore, if you remove virtual
+ from DisplayProductInfo() in the Product class, the method cannot be overridden in the DiscountedProduct class (assuming you're using it as a base class), and you won't achieve the desired polymorphic behavior.
+
 #### Q19: Because we inherited from Parent, what class members did we get access to in Groceries?
+name and price
+
 #### Q20: What access modifier is needed for everything in your project to have access to class members ( there are 2 that would work )?
+public and internal 
+
 #### Q21: When each instanced object called `DisplayProductInfo()` the output was different based on the object. Why is that?
+The difference in output when each instance of an object calls
+the DisplayProductInfo() method is due to polymorphism,Polymorphism 
+allows objects of different types to be treated as objects of a common 
+base type (in this case, the Product class) through a shared interface 
+(in this case, the DisplayProductInfo() method), while still executing 
+the appropriate implementation of the method based on the actual type 
+of the object at runtime.
 
 ## Part 3
 [Page3](Training/Page3.md)
 
-#### Q22: What does the abstract keyword do exactly? What does it prevent?
-#### Q23: The abstract method no longer has a body, why is that? We also removed the word virtual, how do virtual and abstract relate?
-#### Q24: We turned our constructor's accessible type to `protected`. What objects have access to the constructor now that it's `protected`. And since we turned our class `abstract` why doesn't it matter that we can't create a new instance of `Product` in main?
+#### Q22: What were we able to store our child classes in a list of Product?
+Clothing, Electronics, and Groceries are derived classes of Product
+
+#### Q23: We were able to call DisplayProductInfo() on every object, even though each object was directly a Product. Why is that?
+The ability to call the DisplayProductInfo() method on every object,
+even though each object is directly of type Product, is due to
+polymorphism and method overriding.
+
+#### Q24: If I tried to access the Expiry Date field of a product, what would happen? Why would it happen?
+compilation error. This is because the ExpiryDate field is not defined
+in the Product class, and the compiler would not recognize it as a valid
+member of the Product class.
+
 #### Q25: The other classes didn't need to be changed. Specifically, the DisplayProductInfo() didn't need any changing when we swapped our method from virtual to abstract. Why?
 
 ## Part 4

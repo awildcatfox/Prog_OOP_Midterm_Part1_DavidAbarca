@@ -8,24 +8,26 @@ namespace Prog_OOP_Midterm_Part1
 {
     public static class MyDatabase
     {
-        private static List<string> data; // Static field
+          private static List<Product> data; // Static field
 
-        static MyDatabase()
-        {
-            Console.WriteLine("The list is loading");
-            data = new List<string>
-        {
-            "Data 1",
-            "Data 2",
-            "Data 3",
-            "Data 4",
-            "Data 5"
-        };
-        }
+    static MyDatabase()
+    {
+        Console.WriteLine("The list is loading");
+        Clothing tShirt = new Clothing("T-shirt", 19.99, "Medium", "Red");
+        Electronics smartphone = new Electronics("Smartphone", 799.99, "Apple");
+        Groceries banana = new Groceries("Banana", 0.99, "2024-02-10");
 
-        public static List<string> Data // Static property
-        {
-            get { return data; }
-        }
+        data = new List<Product>();
+
+        data.Add(tShirt);
+        data.Add(smartphone);
+        data.Add(banana);
+
+    }
+
+    public static List<Product> Data // Static property
+    {
+        get { return data; }
+    }
     }
 }
