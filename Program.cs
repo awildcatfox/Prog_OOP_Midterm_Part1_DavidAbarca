@@ -11,10 +11,10 @@ namespace Prog_OOP_Midterm_Part1
             Config.UpdateConnectionString("CramberryFarms", "training", "Admin", "1234");
 
             // Saving the connectionString to a local variable
-            string connectionString = Config.ConnectionString;
+            string ConnectionString = Config.ConnectionString;
 
             // Using the Database.ConnectToDatabase() method that takes a formatted connection string to connect
-            Database db = Database.ConnectToDatabase(connectionString);
+            Database db = Database.ConnectToDatabase(ConnectionString);
 
             // If it connects, grab the data as a list of product
             // In the real world theres a lot of framework and code to make this happen
