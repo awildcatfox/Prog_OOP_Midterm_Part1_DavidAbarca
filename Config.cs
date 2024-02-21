@@ -8,6 +8,7 @@ namespace Prog_OOP_Midterm_Part1
 {
     public static class Config
     {
+
         // Fields for configuration settings
         public static string ConnectionString { get; private set; }
 

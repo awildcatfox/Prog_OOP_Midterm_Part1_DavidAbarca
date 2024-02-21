@@ -1,174 +1,175 @@
-﻿using System.collections.generic;
-using System.componentmodel.dataannotations;
-using System.linq;
-using System.text;
-using System.threading.tasks;
+﻿using Prog_OOP_Midterm_Part1;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace prog_oop_midterm_part1
 {
-    internal class database
+    internal class Database
     {
-        list<product> tempdata = new list<product>();
+        List<Product> tempdata = new List<Product>();
 
-        static database _instance = null;
+        static Database _instance = null;
 
-        private database(connectionstringparser csp)
+        private Database(ConnectionStringParser csp)
         {
-            populatedata(csp.database);
+            PopulateData(csp.database);
         }
 
-        public static database connecttodatabase(string connectionstring)
+        public static Database ConnectToDatabase(string connectionstring)
         {
-            connectionstringparser csp = new connectionstringparser(connectionstring);
+            ConnectionStringParser csp = new ConnectionStringParser(connectionstring);
 
             if (!csp.isvalid())
             {
-                console.writeline("the connection string you entered was invalid. check all of your arguments");
+                Console.WriteLine("the connection string you entered was invalid. check all of your arguments");
                 return null;
             }
 
-            if (!validateinfo(csp)) return null;
+            if (!ValidateInfo(csp)) return null;
 
             if (_instance == null)
             {
-                _instance = new database(csp);
+                _instance = new Database(csp);
             }
 
             return _instance;
         }
 
-        private void populatedata(string database)
+        private void PopulateData(string database)
         {
             if (database == "training")
             {
-                tempdata = new list<product>
+                tempdata = new List<Product>
                 {
-                    new clothing("t-shirt", 19.99, "medium", "red"),
-                    new electronics("smartphone", 799.99, "apple"),
-                    new groceries("banana", 0.99, "2024-02-10"),
-                    new clothing("jeans", 39.99, "large", "blue"),
-                    new electronics("laptop", 1499.99, "dell"),
-                    new groceries("apple", 1.99, "2024-02-15"),
-                    new clothing("dress", 49.99, "small", "black"),
-                    new electronics("tablet", 499.99, "samsung"),
-                    new groceries("orange", 0.79, "2024-02-12"),
-                    new clothing("jacket", 59.99, "medium", "green"),
+                    new Clothing("t-shirt", 19.99, "medium", "red"),
+                    new Electronics("smartphone", 799.99, "apple"),
+                    new Groceries("banana", 0.99, "2024-02-10"),
+                    new Clothing("jeans", 39.99, "large", "blue"),
+                    new Electronics("laptop", 1499.99, "dell"),
+                    new Groceries("apple", 1.99, "2024-02-15"),
+                    new Clothing("dress", 49.99, "small", "black"),
+                    new Electronics("tablet", 499.99, "samsung"),
+                    new Groceries("orange", 0.79, "2024-02-12"),
+                    new Clothing("jacket", 59.99, "medium", "green"),
                 };
             }
             else
             {
-                tempdata = new list<product> {
-            new clothing("t-shirt", 19.99, "medium", "red"),
-            new electronics("smartphone", 799.99, "apple"),
-            new groceries("banana", 0.99, "2024-02-10"),
-            new clothing("jeans", 39.99, "large", "blue"),
-            new electronics("laptop", 1499.99, "dell"),
-            new groceries("apple", 1.99, "2024-02-15"),
-            new clothing("dress", 49.99, "small", "black"),
-            new electronics("tablet", 499.99, "samsung"),
-            new groceries("orange", 0.79, "2024-02-12"),
-            new clothing("jacket", 59.99, "medium", "green"),
-            new electronics("smartwatch", 199.99, "fitbit"),
-            new groceries("grapes", 1.49, "2024-02-14"),
-            new clothing("sweater", 29.99, "large", "gray"),
-            new electronics("desktop computer", 899.99, "hp"),
-            new groceries("pineapple", 2.99, "2024-02-20"),
-            new clothing("hat", 9.99, "one size", "white"),
-            new electronics("bluetooth speaker", 79.99, "jbl"),
-            new groceries("mango", 1.29, "2024-02-17"),
-            new clothing("shorts", 29.99, "medium", "blue"),
-            new electronics("digital camera", 299.99, "canon"),
-            new groceries("cherry", 1.59, "2024-02-25"),
-            new clothing("socks", 4.99, "one size", "black"),
-            new electronics("headphones", 149.99, "sony"),
-            new groceries("watermelon", 3.49, "2024-02-28"),
-            new clothing("gloves", 7.99, "medium", "brown"),
-            new electronics("gaming console", 399.99, "microsoft"),
-            new groceries("blueberry", 1.69, "2024-03-05"),
-            new clothing("scarf", 12.99, "one size", "blue"),
-            new electronics("smartphone 1", 799.99, "apple"),
-            new groceries("milk", 2.49, "2024-02-10"),
-            new clothing("shorts 1", 24.99, "large", "gray"),
-            new electronics("laptop 1", 1499.99, "dell"),
-            new groceries("eggs", 1.99, "2024-02-15"),
-            new clothing("sweatshirt 1", 34.99, "large", "gray"),
-            new electronics("tablet 1", 499.99, "samsung"),
-            new groceries("bread", 2.99, "2024-02-12"),
-            new clothing("dress 1", 39.99, "small", "red"),
-            new electronics("smartwatch 1", 199.99, "fitbit"),
-            new groceries("apples", 1.29, "2024-02-14"),
-            new clothing("jeans 1", 49.99, "large", "black"),
-            new electronics("desktop computer 1", 899.99, "hp"),
-            new groceries("pasta", 1.49, "2024-02-17"),
-            new clothing("shoes 1", 59.99, "8", "white"),
-            new electronics("digital camera 1", 299.99, "canon"),
-            new groceries("oranges", 0.99, "2024-02-20"),
-            new clothing("hat 1", 12.99, "one size", "green"),
-            new electronics("bluetooth speaker 1", 79.99, "jbl"),
-            new groceries("cereal", 3.49, "2024-02-22"),
-            new clothing("socks 1", 4.99, "one size", "black"),
-            new electronics("headphones 1", 149.99, "sony"),
-            new groceries("tomatoes", 1.79, "2024-02-25"),
-            new clothing("gloves 1", 7.99, "medium", "brown"),
-            new electronics("gaming console 1", 399.99, "microsoft"),
-            new groceries("potatoes", 1.49, "2024-02-28"),
-            new clothing("scarf 1", 12.99, "one size", "blue"),
-            new electronics("smartphone 2", 899.99, "samsung"),
-            new groceries("carrots", 1.29, "2024-03-02"),
-            new clothing("t-shirt 2", 17.99, "large", "white"),
-            new electronics("smart tv 1", 899.99, "lg"),
-            new groceries("onions", 0.79, "2024-03-05"),
-            new clothing("dress 2", 44.99, "medium", "purple"),
-            new electronics("wireless mouse 1", 24.99, "logitech"),
-            new groceries("bell peppers", 1.99, "2024-03-08"),
-            new clothing("jeans 2", 45.99, "medium", "black"),
-            new electronics("e-book reader 1", 119.99, "amazon"),
-            new groceries("cucumbers", 0.99, "2024-03-10"),
-            new clothing("shoes 2", 69.99, "9", "brown"),
-        };
+                tempdata = new List<Product> {
+            new Clothing("t-shirt", 19.99, "medium", "red"),
+            new Electronics("smartphone", 799.99, "apple"),
+            new Groceries("banana", 0.99, "2024-02-10"),
+            new Clothing("jeans", 39.99, "large", "blue"),
+            new Electronics("laptop", 1499.99, "dell"),
+            new Groceries("apple", 1.99, "2024-02-15"),
+            new Clothing("dress", 49.99, "small", "black"),
+            new Electronics("tablet", 499.99, "samsung"),
+            new Groceries("orange", 0.79, "2024-02-12"),
+            new Clothing("jacket", 59.99, "medium", "green"),
+            new Electronics("smartwatch", 199.99, "fitbit"),
+            new Groceries("grapes", 1.49, "2024-02-14"),
+            new Clothing("sweater", 29.99, "large", "gray"),
+            new Electronics("desktop computer", 899.99, "hp"),
+            new Groceries("pineapple", 2.99, "2024-02-20"),
+            new Clothing("hat", 9.99, "one size", "white"),
+            new Electronics("bluetooth speaker", 79.99, "jbl"),
+            new Groceries("mango", 1.29, "2024-02-17"),
+            new Clothing("shorts", 29.99, "medium", "blue"),
+            new Electronics("digital camera", 299.99, "canon"),
+            new Groceries("cherry", 1.59, "2024-02-25"),
+            new Clothing("socks", 4.99, "one size", "black"),
+            new Electronics("headphones", 149.99, "sony"),
+            new Groceries("watermelon", 3.49, "2024-02-28"),
+            new Clothing("gloves", 7.99, "medium", "brown"),
+            new Electronics("gaming console", 399.99, "microsoft"),
+            new Groceries("blueberry", 1.69, "2024-03-05"),
+            new Clothing("scarf", 12.99, "one size", "blue"),
+            new Electronics("smartphone 1", 799.99, "apple"),
+            new Groceries("milk", 2.49, "2024-02-10"),
+            new Clothing("shorts 1", 24.99, "large", "gray"),
+            new Electronics("laptop 1", 1499.99, "dell"),
+            new Groceries("eggs", 1.99, "2024-02-15"),
+            new Clothing("sweatshirt 1", 34.99, "large", "gray"),
+            new Electronics("tablet 1", 499.99, "samsung"),
+            new Groceries("bread", 2.99, "2024-02-12"),
+            new Clothing("dress 1", 39.99, "small", "red"),
+            new Electronics("smartwatch 1", 199.99, "fitbit"),
+            new Groceries("apples", 1.29, "2024-02-14"),
+            new Clothing("jeans 1", 49.99, "large", "black"),
+            new Electronics("desktop computer 1", 899.99, "hp"),
+            new Groceries("pasta", 1.49, "2024-02-17"),
+            new Clothing("shoes 1", 59.99, "8", "white"),
+            new Electronics("digital camera 1", 299.99, "canon"),
+            new Groceries("oranges", 0.99, "2024-02-20"),
+            new Clothing("hat 1", 12.99, "one size", "green"),
+            new Electronics("bluetooth speaker 1", 79.99, "jbl"),
+            new Groceries("cereal", 3.49, "2024-02-22"),
+            new Clothing("socks 1", 4.99, "one size", "black"),
+            new Electronics("headphones 1", 149.99, "sony"),
+            new Groceries("tomatoes", 1.79, "2024-02-25"),
+            new Clothing("gloves 1", 7.99, "medium", "brown"),
+            new Electronics("gaming console 1", 399.99, "microsoft"),
+            new Groceries("potatoes", 1.49, "2024-02-28"),
+            new Clothing("scarf 1", 12.99, "one size", "blue"),
+            new Electronics("smartphone 2", 899.99, "samsung"),
+            new Groceries("carrots", 1.29, "2024-03-02"),
+            new Clothing("t-shirt 2", 17.99, "large", "white"),
+            new Electronics("smart tv 1", 899.99, "lg"),
+            new Groceries("onions", 0.79, "2024-03-05"),
+            new Clothing("dress 2", 44.99, "medium", "purple"),
+            new Electronics("wireless mouse 1", 24.99, "logitech"),
+            new Groceries("bell peppers", 1.99, "2024-03-08"),
+            new Clothing("jeans 2", 45.99, "medium", "black"),
+            new Electronics("e-book reader 1", 119.99, "amazon"),
+            new Groceries("cucumbers", 0.99, "2024-03-10"),
+            new Clothing("shoes 2", 69.99, "9", "brown"),
+                };
             }
         }
 
-        private static bool validateinfo(connectionstringparser csp)
+        private static bool ValidateInfo(ConnectionStringParser csp)
         {
             if (csp.server != "cramberryfarms")
             {
-                console.writeline("unrecognized database name");
+                Console.WriteLine("unrecognized database name");
                 return false;
             }
 
             if (csp.database != "training" && csp.database != "main")
             {
-                console.writeline("unrecognized server name");
+                Console.WriteLine("unrecognized server name");
                 return false;
             }
 
             if (csp.uid != "admin")
             {
-                console.writeline("unrecognized admin name");
+                Console.WriteLine("unrecognized admin name");
                 return false;
             }
 
             if (csp.password != "1234")
             {
-                console.writeline("unrecognized password");
+                Console.WriteLine("unrecognized password");
                 return false;
             }
 
             return true;
         }
 
-        public static bool isconnected()
+        public static bool IsConnected()
         {
             return !(_instance == null);
         }
 
-        public list<product> data()
+        public List<Product> Data()
         {
             return tempdata;
         }
 
-        private class connectionstringparser
+        private class ConnectionStringParser
         {
             public string driver { get; set; }
             public string server { get; set; }
@@ -176,17 +177,17 @@ namespace prog_oop_midterm_part1
             public string uid { get; set; }
             public string password { get; set; }
 
-            public connectionstringparser(string connectionstring)
+            public ConnectionStringParser(string connectionstring)
             {
-                string[] parts = connectionstring.split(';');
+                string[] parts = connectionstring.Split(';');
                 foreach (var part in parts)
                 {
-                    var keyvalue = part.split('=');
-                    if (keyvalue.length == 2)
+                    var keyvalue = part.Split('=');
+                    if (keyvalue.Length == 2)
                     {
-                        var key = keyvalue[0].trim();
-                        var value = keyvalue[1].trim();
-                        switch (key.tolower())
+                        var key = keyvalue[0].Trim();
+                        var value = keyvalue[1].Trim();
+                        switch (key.ToLower())
                         {
                             case "driver":
                                 driver = value;
@@ -210,11 +211,11 @@ namespace prog_oop_midterm_part1
 
             public bool isvalid()
             {
-                return !string.isnullorwhitespace(driver)
-                    && !string.isnullorwhitespace(server)
-                    && !string.isnullorwhitespace(database)
-                    && !string.isnullorwhitespace(uid)
-                    && !string.isnullorwhitespace(password);
+                return !string.IsNullOrWhiteSpace(driver)
+                    && !string.IsNullOrWhiteSpace(server)
+                    && !string.IsNullOrWhiteSpace(database)
+                    && !string.IsNullOrWhiteSpace(uid)
+                    && !string.IsNullOrWhiteSpace(password);
             }
         }
     }
