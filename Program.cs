@@ -8,7 +8,7 @@ namespace Prog_OOP_Midterm_Part1
         static void Main()
         {
             // Using our UpdateConfig method to change our connection string. Make sure to pass in the correct information
-            Config.UpdateConnectionString("CramberryFarms", "training", "Admin", "1234");
+            Config.UpdateConnectionString("cramberryfarms", "training", "admin", "1234");
 
             // Saving the connectionString to a local variable
             string ConnectionString = Config.ConnectionString;

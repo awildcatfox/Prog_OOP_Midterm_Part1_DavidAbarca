@@ -22,7 +22,7 @@ namespace prog_oop_midterm_part1
         {
             ConnectionStringParser csp = new ConnectionStringParser(connectionstring);
 
-            if (!csp.isvalid())
+            if (!csp.IsValid())
             {
                 Console.WriteLine("the connection string you entered was invalid. check all of your arguments");
                 return null;
@@ -209,7 +209,7 @@ namespace prog_oop_midterm_part1
                 }
             }
 
-            public bool isvalid()
+            public bool IsValid()
             {
                 return !string.IsNullOrWhiteSpace(driver)
                     && !string.IsNullOrWhiteSpace(server)
